@@ -17,17 +17,20 @@ mongoose.connect(dataBaseConfig.db, {
   }
 )
 
-// Set up express js port
-const studentRoute = require('./routes/student.route')
+// Set up express js port for players
+const playerRoute = require('../backend/routes/player.route')
+const gameRoute = require('../backend/routes/game.route')
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist/angular8-meanstack-angular-material')));
-app.use('/', express.static(path.join(__dirname, 'dist/angular8-meanstack-angular-material')));
-app.use('/api', studentRoute)
+app.use(express.static(path.join(__dirname, 'dist/Gamer-Lobby-COMP-3123')));
+app.use('/', express.static(path.join(__dirname, 'dist/Gamer-Lobby-COMP-3123')));
+app.use('/api', playerRoute);
+app.use('/gamesApi', gameRoute);
 
 // Create port
 const port = process.env.PORT || 4000;
